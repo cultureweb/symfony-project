@@ -1,0 +1,14 @@
+{
+  "name": "vendor_name/Admin",
+  "description": "description",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "cedri",
+      "email": "email@example.com"
+    }
+  ],
+  "require": {
+  }
+}
