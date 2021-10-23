@@ -6,7 +6,7 @@ use App\Entity\Product;
 
 use App\Form\SearchType;
 use App\Repository\ProductRepository;
-use App\Search\Search;
+use App\Classes\Search;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;

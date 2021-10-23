@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Search;
+namespace App\Classes;
 
 use App\Entity\Category;
 

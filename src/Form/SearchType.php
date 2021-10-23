@@ -5,7 +5,7 @@ namespace App\Form;
 
 
 use App\Entity\Category;
-use App\Search\Search;
+use App\Classes\Search;
 
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
