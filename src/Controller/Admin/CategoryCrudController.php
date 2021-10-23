@@ -19,21 +19,21 @@ class CategoryCrudController extends AbstractCrudController
     }
 
 
-    public function configureFields(string $pageName): iterable
-    {
-        return [
-            TextField::new('name'),
-            SlugField::new('slug')->setTargetFieldName('name'),
-            ImageField::new('illustration')
-                ->setBasePath('uploads/')
+//    public function configureFields(string $pageName): iterable
+//    {
+//        return [
+//            TextField::new('name'),
+//            SlugField::new('slug')->setTargetFieldName('name'),
+//            ImageField::new('illustration')
+//                ->setBasePath('uploads/')
 //                ->setUploadDir('project/public/uploads')
 //                ->setUploadedFileNamePattern('[randomhash].[extension]')
-                ->setRequired(false),
-            TextField::new('subtitle'),
-            TextareaField::new('description'),
-            MoneyField::new('price')->setCurrency('EUR'),
-            AssociationField::new('category')
-        ];
-    }
+//                ->setRequired(false),
+//            TextField::new('subtitle'),
+//            TextareaField::new('description'),
+//            MoneyField::new('price')->setCurrency('EUR'),
+//            AssociationField::new('category')
+//        ];
+//    }
 
 }
