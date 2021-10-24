@@ -22,10 +22,15 @@
                 <th>
                     <img src="/uploads/{{ product.product.illustration }}" alt="{{ product.product.name }}" height="75px">
                    </th>
-                <td> {{ product.product.name }}</td>
-                <td>{{ product.quantity }}</td>
-                <td>{{ (product.product.price / 100)|number_format(2,',','.')}}</td>
-                <td>{{ ((product.product.price * product.quantity)/100)|number_format(2,',','.')}}</td>
+                <td class="align-middle"> {{ product.product.name }}</td>
+                <td class="align-middle">{{ product.quantity }}</td>
+                <td class="align-middle" >{{ (product.product.price / 100)|number_format(2,',','.')}}</td>
+                <td class="align-middle">{{ ((product.product.price * product.quantity)/100)|number_format(2,',','.')}}</td>
+                <td class="align-middle" >
+                    <a href="{{ path('cancel_from_cart', { 'id' : product.product.id }) }}">
+                        <img src="{{ asset('assets/img/cancel.png') }}" height="18px" alt="remove">
+                    </a>
+                </td>
             </tr>
             {% set total = total + product.product.price * product.quantity %}
         {% endfor %}

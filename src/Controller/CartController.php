@@ -56,4 +56,14 @@ class CartController extends AbstractController
 
         return $this->redirectToRoute('cart');
     }
+
+    /**
+     * @Route("/cart/cancel/{id}", name="cancel_from_cart")
+     */
+    public function cancel(Cart $cart, $id): Response
+    {
+        $cart->cancel($id);
+
+        return $this->redirectToRoute('cart');
+    }
 }
