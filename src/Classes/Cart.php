@@ -3,7 +3,8 @@
 
 namespace App\Classes;
 
-use Doctrine\ORM\Mapping as ORM;
+use App\Entity\Product;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 /**
@@ -12,17 +13,47 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
  */
 class Cart
 {
-    private $session;
+    /**
+     * @var SessionInterface
+     */
+    private SessionInterface $session;
+    /**
+     * @var EntityManagerInterface
+     */
+    private EntityManagerInterface $em;
 
-
-    public function __construct(SessionInterface $session)
-    {
-        $this->session = $session;
-    }
 
     /**
-     *
+     * Cart constructor.
+     * @param EntityManagerInterface $em
+     * @param SessionInterface $session
      */
+    public function __construct(EntityManagerInterface $em, SessionInterface $session)
+    {
+        $this->session = $session;
+        $this->em = $em;
+
+    }
+
+    public function getFull(){
+
+        $cartComplete = [];
+        if($this->get()){
+            foreach ($this->get() as $id => $quantity) {
+                $productObject = $this->em->getRepository(Product::class)->findOneBy(['id'=> $id]);
+                if(!$productObject){
+                    $this->cancel($id);
+                    continue;
+                }
+                $cartComplete[] = [
+                    'product'=> $productObject,
+                    'quantity'=>$quantity
+                ];
+            }
+        }
+        return $cartComplete;
+    }
+
     public function add($id)
     {
         $cart = $this->session->get('cart',[]);
