@@ -5,6 +5,8 @@
 {% block content %}
 <h1>Mon panier</h1>
     Retrouver l'ensemble des produits que vous avez ajouter au panier.
+
+    {% if cart|length > 0 %}
     <table class="table mt-3">
         <thead>
         <tr>
@@ -23,7 +25,15 @@
                     <img src="/uploads/{{ product.product.illustration }}" alt="{{ product.product.name }}" height="75px">
                    </th>
                 <td class="align-middle"> {{ product.product.name }}</td>
-                <td class="align-middle">{{ product.quantity }}</td>
+                <td class="align-middle">
+                    <a href="{{ path('decrease_from_cart', {'id': product.product.id}) }}">
+                        <img src="{{ asset('assets/img/signe-moins.png') }}" height="10px" alt="retirer du panier">
+                    </a>
+                    {{ product.quantity }}
+                    <a href="{{ path('add_to_cart', {'id': product.product.id}) }}">
+                    <img src="{{ asset('assets/img/plus.png') }}" height="10px" alt="ajouter au panier">
+                    </a>
+                </td>
                 <td class="align-middle" >{{ (product.product.price / 100)|number_format(2,',','.')}}</td>
                 <td class="align-middle">{{ ((product.product.price * product.quantity)/100)|number_format(2,',','.')}}</td>
                 <td class="align-middle" >
@@ -42,4 +52,8 @@
         <a href="" class="btn btn-success btn-block mt-3">Valider mon panier</a>
 
     </div>
+    {% else %}
+        <hr>
+        <b>Votre panier est vide</b>
+    {% endif %}
 {% endblock %}
