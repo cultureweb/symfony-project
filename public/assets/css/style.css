@@ -5,9 +5,81 @@ html, body {
 main {
     min-height: 100%;
 }
-.navbar-item-custom, .navbar-item-custom a {
+header a {
     color: white;
 }
+header .navbar-light {
+    background: black;
+}
+header .navbar-light a {
+    color: white !important;
+}
+header .dropdown:hover > .dropdown-menu {
+    display: block;
+}
+header .dropdown > .dropdown-toggle:active {
+    pointer-events: none;
+}
+header .navbar-nav {
+    padding-top: 1rem;
+}
+@media (min-width: 1000px) {
+    header .navbar-nav {
+        padding-top: 0;
+    }
+}
+header .navbar-toggler:focus, header .navbar-toggler:active {
+    outline: 0;
+}
+header .navbar-toggler {
+    height: 45px;
+}
+header .navbar-toggler span {
+    display: block;
+    background-color: white;
+    height: 2px;
+    width: 25px;
+    margin-top: 6px;
+    margin-bottom: 4px;
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+    position: relative;
+    opacity: 1;
+}
+header .navbar-toggler span:nth-child(1), header .navbar-toggler span:nth-child(3) {
+    -webkit-transition: transform 0.35s ease-in-out;
+    -moz-transition: transform 0.35s ease-in-out;
+    -o-transition: transform 0.35s ease-in-out;
+    transition: transform 0.35s ease-in-out;
+}
+header .navbar-toggler:not(.collapsed) span:nth-child(1) {
+    position: absolute;
+    top: 32px;
+    -webkit-transform: rotate(135deg);
+    -moz-transform: rotate(135deg);
+    -o-transform: rotate(135deg);
+    transform: rotate(135deg);
+    opacity: 0.9;
+}
+header .navbar-toggler:not(.collapsed) span:nth-child(2) {
+    visibility: hidden;
+    background-color: transparent;
+}
+header .navbar-toggler:not(.collapsed) span:nth-child(3) {
+    position: absolute;
+    top: 32px;
+    -webkit-transform: rotate(-135deg);
+    -moz-transform: rotate(-135deg);
+    -o-transform: rotate(-135deg);
+    transform: rotate(-135deg);
+    opacity: 0.9;
+}
+
+/*.navbar-item-custom, .navbar-item-custom a {*/
+/*    color: white;*/
+/*}*/
 .footer-custom{
     text-align: center;
     position: absolute;
