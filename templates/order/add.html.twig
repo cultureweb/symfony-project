@@ -1,5 +1,10 @@
 {% extends 'base.html.twig' %}
 
+{% block javascript %}
+<script src="https://js.stripe.com/v3/"></script>
+
+{% endblock %}
+
 {% block title %}Paiement de ma commande - La boutique{% endblock %}
 
 {% block content %}
@@ -53,9 +58,32 @@
             <strong>Livraison: </strong>{{ carrier.price|number_format(2,',','.')  }} €
             <hr>
             <strong>Total: </strong>{{ (carrier.price + (total/100))|number_format(2,',','.')  }} €
-            <a href="" class="btn btn-success btn-block mt-3">
+            <a class="btn btn-success btn-block mt-3" id="checkout-button">
                 Payer {{ (carrier.price + (total/100))|number_format(2,',','.')  }} €
             </a>
         </div>
     </div>
+    {% block script %}
+        <script type="text/javascript">
+        const stripe = Stripe("pk_test_51JpH8BHD4Rm2YyTMsicyVuTj01gfQzEdH36PG4CUZEllGNKSbt3DRNW1C4uwT4DcJbdrg7bjNchXg9OfMiNygXIj00QCXRUdnS");
+        const checkoutButton = document.getElementById("checkout-button");
+        checkoutButton.addEventListener("click", function(){
+            fetch("/commande/create-session", {
+                method: "POST",
+            })
+            .then(function (response){
+              return response.json();
+            }).then(function(session){
+                return stripe.redirectToCheckout({ sessionId: session.id});
+            }).then(function (result){
+                if(result.error){
+                    alert(result.error.message)
+                }
+            })
+            .catch(function (error){
+                console.error("Error", error);
+            });
+        });
+        </script>
+    {% endblock %}
 {% endblock %}

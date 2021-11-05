@@ -46,7 +46,9 @@ class OrderController extends AbstractController
     }
 
     /**
-     * @Route("/commande/recpitulatif", name="order_checkout",methods={"POST"})
+     * @Route("/commande/recapitulatif", name="order_checkout",methods={"POST"})
+     *
+     * @throws \Stripe\Exception\ApiErrorException
      */
     public function add(Cart $cart, Request $request): Response
     {
@@ -60,7 +62,7 @@ class OrderController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()){
             $date = new \DateTimeImmutable();
             $carriers =$form->get('carriers')->getData();
-//            dd($form);
+
             $delivery =$form->get('addresses')->getData();
             $delivery_content = $delivery->getFirstname().' '.$delivery->getLastname();
             $delivery_content.= '<br/>'.$delivery->getPhone();
@@ -98,6 +100,7 @@ class OrderController extends AbstractController
             }
 
             $this->em->flush();
+
 
             return $this->render('order/add.html.twig', [
                 'cart'=>$cart->getFull(),
