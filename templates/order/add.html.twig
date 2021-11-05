@@ -68,12 +68,15 @@
         const stripe = Stripe("pk_test_51JpH8BHD4Rm2YyTMsicyVuTj01gfQzEdH36PG4CUZEllGNKSbt3DRNW1C4uwT4DcJbdrg7bjNchXg9OfMiNygXIj00QCXRUdnS");
         const checkoutButton = document.getElementById("checkout-button");
         checkoutButton.addEventListener("click", function(){
-            fetch("/commande/create-session", {
+            fetch("/commande/create-session/{{ reference }}", {
                 method: "POST",
             })
             .then(function (response){
               return response.json();
             }).then(function(session){
+                if(session.error == 'order'){
+                   window.location.replace('{{ path('order') }}');
+                }
                 return stripe.redirectToCheckout({ sessionId: session.id});
             }).then(function (result){
                 if(result.error){
